@@ -1,0 +1,61 @@
+/* Reset Ant Design modal styles */
+.ant-modal {
+    display: block !important;
+    opacity: 1 !important;
+  }
+  
+  .ant-modal-wrap {
+    z-index: 1000 !important;
+    pointer-events: auto !important;
+  }
+  
+  .ant-modal-mask {
+    display: block !important;
+    opacity: 1 !important;
+    background-color: rgba(0, 0, 0, 0.45) !important;
+  }
+  
+  .ant-modal-content {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+
+  /* Ensure FixedModal appears above everything */
+.fixed-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    pointer-events: none;
+  }
+  
+  .fixed-modal-container.visible {
+    pointer-events: auto;
+  }
+  
+  .fixed-modal-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+  }
+  
+  .fixed-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow: auto;
+  }
