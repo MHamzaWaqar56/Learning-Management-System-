@@ -9,7 +9,7 @@ FineTech LMS is a comprehensive, responsive, and scalable Learning Management Sy
 ### Key Features:
 - **User Roles:** Students, Instructors, and Administrators with role-based access.
 - **Authentication:** Secure user registration, login, email verification, and password reset.
-- **Student Panel:** Browse courses, enroll, track progress, and complete lessons.
+- **Student Panel:** Browse courses, enroll, track progress, complete lessons and download certificate.
 - **Admin Panel:** Manage users, assign roles, create/update courses, and view reports.
 - **Instructor Role:** Create and update course content.
 - **Content Support:** Text-based and image-supported lessons with a minimum of 500+ words.
@@ -31,13 +31,6 @@ FineTech LMS is a comprehensive, responsive, and scalable Learning Management Sy
 - **Backend:** Models, controllers, routes, middleware, and configuration files.
 
 This structure ensures scalability and maintainability.
-
----
-
-## 🚀 Deployment
-- **Frontend:** Deploy using Vercel or Netlify.
-- **Backend:** Deploy using Render or Railway.
-- **Database:** Host using MongoDB Compass.
 
 ---
 
