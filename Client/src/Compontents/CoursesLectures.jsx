@@ -1,14 +1,12 @@
-
-import { useState, useEffect, useContext, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { Button, Spin, Modal , Tag} from 'antd';
-import { toast } from 'react-toastify';
-import { Context } from '../main';
-import approvalApi from '../APIs/ApprovalApi';
-import CourseProgress from '../Pages/CourseProgress';
-import EnrollmentButton from './EnrollmentButton';
-import FormatPrice from '../Helper/FormatPrice';
+import { useState, useEffect, useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { Button, Spin, Modal, Tag } from "antd";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+import approvalApi from "../APIs/ApprovalApi";
+import CourseProgress from "../Pages/CourseProgress";
+import EnrollmentButton from "./EnrollmentButton";
 
 // Styled Components
 
@@ -20,9 +18,9 @@ const CoursesWrapper = styled.div`
 `;
 
 const TitlePrice = styled.div`
-  display : flex;
+  display: flex;
   justify-content: space-between;
-`
+`;
 
 const OriginalPrice = styled.span`
   text-decoration: line-through;
@@ -55,7 +53,7 @@ const CourseCard = styled.div`
   width: 30%;
   background: white;
   border-radius: 0.8rem;
-  position : relative;
+  position: relative;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -101,7 +99,7 @@ const CourseDescription = styled.p`
 const CourseCategory = styled.span`
   background-color: #f0f0f0;
   color: #555;
-  display: flex ;
+  display: flex;
   justify-content: space-between;
   padding: 0.3rem 0.5rem;
   border-radius: 0.3rem;
@@ -131,7 +129,6 @@ const InstructorAvatar = styled.div`
   text-transform: uppercase;
 `;
 
-
 const DiscountBadge = styled(Tag)`
   position: absolute;
   top: 10px;
@@ -144,9 +141,6 @@ const DiscountBadge = styled(Tag)`
   padding: 0 8px;
   font-size: 14px;
 `;
-
-
-
 
 const InstructorName = styled.span`
   color: #555;
@@ -166,15 +160,11 @@ const SeeLecturesButton = styled(Button)`
   }
 `;
 
-<<<<<<< HEAD
-=======
 const CoursePrice = styled.h3`
   margin: 0 0 1rem 0;
   font-size: 1.2rem;
   color: #222;
 `;
-
->>>>>>> 8021f8c (Your commit message)
 const ExpiryBadge = styled(Tag)`
   position: absolute;
   top: 10px;
@@ -223,8 +213,8 @@ function CoursesLectures() {
       });
       setEnrollmentStatus(status);
     } catch (error) {
-      console.error('Error fetching courses:', error);
-      toast.error('Failed to load courses');
+      console.error("Error fetching courses:", error);
+      toast.error("Failed to load courses");
     } finally {
       setLoading(false);
     }
@@ -238,10 +228,7 @@ function CoursesLectures() {
     const interval = setInterval(() => {
       if (carouselRef.current) {
         carouselRef.current.scrollLeft += 320;
-        if (
-          carouselRef.current.scrollLeft + carouselRef.current.offsetWidth >=
-          carouselRef.current.scrollWidth
-        ) {
+        if (carouselRef.current.scrollLeft + carouselRef.current.offsetWidth >= carouselRef.current.scrollWidth) {
           carouselRef.current.scrollLeft = 0;
         }
       }
@@ -266,7 +253,7 @@ function CoursesLectures() {
   };
 
   const handleLoginRedirect = () => {
-    navigate('/auth');
+    navigate("/auth");
     setLoginModalVisible(false);
   };
 
@@ -283,110 +270,73 @@ function CoursesLectures() {
 
   return (
     <CoursesWrapper>
-
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '2rem' }}>
+        <div style={{ textAlign: "center", padding: "2rem" }}>
           <Spin size="large" />
         </div>
       ) : courses.length > 0 ? (
         <CarouselContainer ref={carouselRef}>
-        {courses.map((course) => {
-          const hasActiveDiscount = isDiscountActive(course);
-      const discountedPrice = getDiscountedPrice(course);
-      
-          return(
-          <CourseCard key={course._id}>
-          {hasActiveDiscount && (
-            <DiscountBadge color="red">
-              {Math.round((course.discount.amount / course.price) * 100)}% OFF
-            </DiscountBadge>
-          )}
-            <Thumbnail>
-              {course.thumbnail ? (
-                <img src={course.thumbnail} alt={course.title} />
-              ) : (
-                <img src="https://via.placeholder.com/300x180?text=No+Thumbnail" alt="Placeholder" />
-              )}
-            </Thumbnail>
-            
-            <CourseContent>
-            
-            <TitlePrice>
-              <CourseTitle>{course.title}</CourseTitle>
-              <div>
-                {hasActiveDiscount ? (
-                  <>
-                    <OriginalPrice>
-                      <FormatPrice price={course.price} />
-                    </OriginalPrice>
-                    <DiscountedPrice>
-                      <FormatPrice price={discountedPrice} />
-                    </DiscountedPrice>
-                  </>
-                ) : (
-                  <CoursePrice>
-                    <FormatPrice price={course.price} />
-                  </CoursePrice>
-                )}
-              </div>
-            </TitlePrice>
+          {courses.map((course) => {
+            const hasActiveDiscount = isDiscountActive(course);
+            const discountedPrice = getDiscountedPrice(course);
 
-            {/* Discount expiry notice */}
-            {hasActiveDiscount && course.discount.expiresAt && (
-              <ExpiryBadge>
-                Offer Ends: {new Date(course.discount.expiresAt).toLocaleDateString()}
-              </ExpiryBadge>
-            )}
-<<<<<<< HEAD
+            return (
+              <CourseCard key={course._id}>
+                {hasActiveDiscount && <DiscountBadge color="red">{Math.round((course.discount.amount / course.price) * 100)}% OFF</DiscountBadge>}
+                <Thumbnail>{course.thumbnail ? <img src={course.thumbnail} alt={course.title} /> : <img src="https://via.placeholder.com/300x180?text=No+Thumbnail" alt="Placeholder" />}</Thumbnail>
 
-=======
->>>>>>> 8021f8c (Your commit message)
-            
-              {course.category && (
-                <CourseCategory>
-                  <p style={{margin: "0px"}}>Category:</p>
-                  {course.category}
-                </CourseCategory>
-              )}
-              
-              <CourseDescription>
-                {course.description?.length > 50 
-                  ? `${course.description.substring(0, 50)}...` 
-                  : course.description}
-              </CourseDescription>
-              
-              <InstructorInfo>
-                <InstructorAvatar>
-                  {course.instructor?.name?.charAt(0) || 'I'}
-                </InstructorAvatar>
-                <InstructorName>
-                  {course.instructor?.name || 'Instructor'}
-                </InstructorName>
-              </InstructorInfo>
+                <CourseContent>
+                  <TitlePrice>
+                    <CourseTitle>{course.title}</CourseTitle>
+                    <div>
+                      {hasActiveDiscount ? (
+                        <>
+                          <OriginalPrice>
+                            <FormatPrice price={course.price} />
+                          </OriginalPrice>
+                          <DiscountedPrice>
+                            <FormatPrice price={discountedPrice} />
+                          </DiscountedPrice>
+                        </>
+                      ) : (
+                        <CoursePrice>
+                          <FormatPrice price={course.price} />
+                        </CoursePrice>
+                      )}
+                    </div>
+                  </TitlePrice>
 
-              {/* Course Progress Component */}
-              {isAuthenticated && enrollmentStatus[course._id] && (
-                <CourseProgress courseId={course._id} />
-              )}
-              
-              
-              {enrollmentStatus[course._id] ? (
-                <SeeLecturesButton 
-                  type="primary" 
-                  onClick={() => handleSeeLectures(course._id)}
-                >
-                  See Lectures
-                </SeeLecturesButton>
-              ) : (
-                <EnrollmentButton 
-                  courseId={course._id} 
-                  onEnrollSuccess={() => handleEnrollSuccess(course._id)}
-                  showLoginModal={() => setLoginModalVisible(true)}
-                />
-              )}
-            </CourseContent>
-          </CourseCard>
-        )})}
+                  {/* Discount expiry notice */}
+                  {hasActiveDiscount && course.discount.expiresAt && <ExpiryBadge>Offer Ends: {new Date(course.discount.expiresAt).toLocaleDateString()}</ExpiryBadge>}
+
+                  {course.category && (
+                    <CourseCategory>
+                      <p style={{ margin: "0px" }}>Category:</p>
+                      {course.category}
+                    </CourseCategory>
+                  )}
+
+                  <CourseDescription>{course.description?.length > 50 ? `${course.description.substring(0, 50)}...` : course.description}</CourseDescription>
+
+                  <InstructorInfo>
+                    <InstructorAvatar>{course.instructor?.name?.charAt(0) || "I"}</InstructorAvatar>
+                    <InstructorName>{course.instructor?.name || "Instructor"}</InstructorName>
+                  </InstructorInfo>
+
+                  {/* Course Progress Component */}
+                  {isAuthenticated && enrollmentStatus[course._id] && <CourseProgress courseId={course._id} />}
+
+                  {enrollmentStatus[course._id] ? (
+                    <SeeLecturesButton type="primary" onClick={() => handleSeeLectures(course._id)}>
+                      See Lectures
+                    </SeeLecturesButton>
+                  ) : (
+                    <EnrollmentButton courseId={course._id} onEnrollSuccess={() => handleEnrollSuccess(course._id)} showLoginModal={() => setLoginModalVisible(true)} />
+                  )}
+                </CourseContent>
+              </CourseCard>
+            );
+          })}
         </CarouselContainer>
       ) : (
         <EmptyState>
@@ -395,14 +345,7 @@ function CoursesLectures() {
         </EmptyState>
       )}
 
-      <Modal
-        title="Login Required"
-        open={loginModalVisible}
-        onOk={handleLoginRedirect}
-        onCancel={() => setLoginModalVisible(false)}
-        okText="Login"
-        cancelText="Cancel"
-      >
+      <Modal title="Login Required" open={loginModalVisible} onOk={handleLoginRedirect} onCancel={() => setLoginModalVisible(false)} okText="Login" cancelText="Cancel">
         <p>You need to login to enroll in courses or access lectures.</p>
       </Modal>
     </CoursesWrapper>
@@ -410,4 +353,3 @@ function CoursesLectures() {
 }
 
 export default CoursesLectures;
-
